@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'org.jongmin.practice'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // 프로젝트 코드가 컴파일 시점과 런타임에 모두 해당 라이브러리를 필요로 할 때 사용
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // 프로젝트의 테스트 코드를 컴파일하고 실행할 때만 필요한 의존성을 설정, 테스트 코드에서만 사용되며 메인 App 코드에는 사용 X
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // 런타임에만 필요한 의존성 지정, 컴파일 시 적용 X 어플리케이션을 실행할 때 필요한 라이브러리를 설정
+    runtimeOnly 'com.h2database:h2' // 인메모리 데이터베이스
+    // runtimeOnly와 반대되는 설정
+    compileOnly 'org.projectlombok:lombok' // 롬복
+    // 컴파일 시에 어노테이션을 처리할 때 사용하는 도구의 의존성 지정
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+test {
+    useJUnitPlatform()
+}
